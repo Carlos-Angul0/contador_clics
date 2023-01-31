@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import logo from './assets/images/logo_1.png'
+import { Boton } from './components/Boton';
+import { Contador } from './components/Contador';
 
 function App() {
+
+  const [numClics, setNumClics] = useState(0);
+
+  const manejarClic = () => {
+    setNumClics(numClics + 1);
+    console.log("Clic")
+  }
+  const reiniciarContador = () => {
+    setNumClics(0)
+    console.log("Reiniciar")
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="logo_contenedor">
+        <img 
+          className="logo"
+          src={logo}
+          alt="Logo"
+        />
+      </div>
+      <div className='contenedor_principal'>
+        <Contador
+          numClics={numClics}
+        />
+
+        <Boton 
+          texto='Clic'
+          btnClic={true}
+          manejarClic={manejarClic}
+        />
+        <Boton 
+          texto='Reiniciar'
+          btnClic={false}
+          manejarClic={reiniciarContador}
+        />
+      </div>
+      <div className="container_principal">
+
+      </div>
     </div>
   );
 }
